@@ -18,7 +18,16 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                sh 'npm test'
+                script {
+                    def testExitCode = sh script: 'npm test', returnStatus: true
+                    if (testExitCode != 0) {
+                        currentBuild.result = 'FAILURE'
+                        emailext attachLog: true,
+                                body: 'Test failed. Please check the build log.',
+                                subject: "Test Failure in ${currentBuild.fullDisplayName}",
+                                to: 'joy.malanga@student.moringaschool.com'
+                    }
+                }
             }
         }
 
