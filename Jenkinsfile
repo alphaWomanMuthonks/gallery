@@ -1,43 +1,47 @@
-// pipeline {
+pipeline {
 
-//     agent any
+    agent {
+        docker {
+            image 'jenkins/node:lts'
+        }
+    }
 
-//     stages {
+    stages {
 
-//         stage('Clone repository') {
+        stage('Clone repository') {
 
-//             steps {
-//                 git 'https://github.com/alphaWomanMuthonks/gallery.git'
-//             }
-//         }
+            steps {
+                git 'https://github.com/alphaWomanMuthonks/gallery.git'
+            }
+        }
 
-//         stage('Install Softwares') {
-//             steps {
-//                 sh 'npm install -g npm'
-//                 // sh 'npm install'
-//             }
-//         }
+        stage('Install Softwares') {
+            steps {
+                sh 'npm install -g npm'
+                // sh 'npm install'
+            }
+        }
 
-//         stage('Build') {
-//             steps {
-//                 sh 'build code'
-//             }
-//         }
+        stage('Build') {
+            steps {
+                sh 'build code'
+            }
+        }
 
-//         stage('Test') {
-//             steps {
-//                 // sh 'npm test'
-//                 sh 'node server.js'
-//             }
-//         }
+        stage('Test') {
+            steps {
+                // sh 'npm test'
+                sh 'node server.js'
+            }
+        }
 
-//         stage('Deploy') {
-//             steps {
-//                 sh 'render deploy'
-//             }
-//         }
-//     }
-// }
+        stage('Deploy') {
+            steps {
+                sh 'render deploy'
+            }
+        }
+    }
+}
 
 
 // pipeline {
@@ -89,46 +93,45 @@
 // }
 
 
+// pipeline {
+//     agent {
+//         docker {
+//             image 'jenkins/node:lts'
+//         }
+//     }
 
-pipeline {
-    agent {
-        docker {
-            image 'jenkins/node:lts'
-        }
-    }
+//     stages {
+//         stage('Clone repository') {
+//             steps {
+//                 git 'https://github.com/alphaWomanMuthonks/gallery.git'
+//             }
+//         }
 
-    stages {
-        stage('Clone repository') {
-            steps {
-                git 'https://github.com/alphaWomanMuthonks/gallery.git'
-            }
-        }
+//         stage('Install Software') {
+//             steps {
+//                 sh 'npm install -g npm'
+//                 sh 'npm install' // You can include this step if needed
+//             }
+//         }
 
-        stage('Install Softwares') {
-            steps {
-                sh 'npm install -g npm'
-                sh 'npm install' // You can include this step if needed
-            }
-        }
+//         stage('Build') {
+//             steps {
+//                 sh 'build code'
+//             }
+//         }
 
-        stage('Build') {
-            steps {
-                sh 'build code'
-            }
-        }
+//         stage('Test') {
+//             steps {
+//                 // You can choose to run npm test or node server.js here based on your needs.
+//                 // sh 'npm test'
+//                 sh 'node server.js'
+//             }
+//         }
 
-        stage('Test') {
-            steps {
-                // sh 'npm test'
-                sh 'node server.js'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                sh 'render deploy'
-            }
-        }
-    }
-}
-
+//         stage('Deploy') {
+//             steps {
+//                 sh 'render deploy'
+//             }
+//         }
+//     }
+// }
