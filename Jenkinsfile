@@ -147,7 +147,7 @@ pipeline {
                 // sh 'apt-get install nodejs'
                 sh 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh'
                 sh 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash'
-                sh 'source ~/.profile'
+                // sh 'source ~/.profile'
                 sh 'nvm install v18.17.1'
             }
         }
