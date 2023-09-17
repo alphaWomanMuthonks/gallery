@@ -1,47 +1,47 @@
-pipeline {
+// pipeline {
 
-    agent {
-        docker {
-            image 'jenkins/node:lts'
-        }
-    }
+//     agent {
+//         docker {
+//             image 'jenkins/node:lts'
+//         }
+//     }
 
-    stages {
+//     stages {
 
-        stage('Clone repository') {
+//         stage('Clone repository') {
 
-            steps {
-                git 'https://github.com/alphaWomanMuthonks/gallery.git'
-            }
-        }
+//             steps {
+//                 git 'https://github.com/alphaWomanMuthonks/gallery.git'
+//             }
+//         }
 
-        stage('Install Softwares') {
-            steps {
-                sh 'npm install -g npm'
-                // sh 'npm install'
-            }
-        }
+//         stage('Install Softwares') {
+//             steps {
+//                 sh 'npm install -g npm'
+//                 // sh 'npm install'
+//             }
+//         }
 
-        stage('Build') {
-            steps {
-                sh 'build code'
-            }
-        }
+//         stage('Build') {
+//             steps {
+//                 sh 'build code'
+//             }
+//         }
 
-        stage('Test') {
-            steps {
-                // sh 'npm test'
-                sh 'node server.js'
-            }
-        }
+//         stage('Test') {
+//             steps {
+//                 // sh 'npm test'
+//                 sh 'node server.js'
+//             }
+//         }
 
-        stage('Deploy') {
-            steps {
-                sh 'render deploy'
-            }
-        }
-    }
-}
+//         stage('Deploy') {
+//             steps {
+//                 sh 'render deploy'
+//             }
+//         }
+//     }
+// }
 
 
 // pipeline {
@@ -135,3 +135,44 @@ pipeline {
 //         }
 //     }
 // }
+
+
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Install Node.js and npm') {
+            steps {
+                sh 'curl -fsSL https://deb.nodesource.com/setup_lts.x | bash -'
+                sh 'apt-get install -y nodejs'
+                sh 'npm install -g npm'
+            }
+        }
+
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/alphaWomanMuthonks/gallery.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'npm run build'
+            }
+        }
+
+        stage('Deploy to Render') {
+            steps {
+                sh 'node server.js'
+            }
+        }
+
+        stage('Make a Change') {
+            steps {
+                sh 'echo "MILESTONE 2" > index.html'
+                git 'commit -am "Add MILESTONE 2" && git push'
+            }
+        }
+    }
+}
