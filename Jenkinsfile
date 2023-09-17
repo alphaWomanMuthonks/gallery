@@ -144,8 +144,7 @@ pipeline {
     stages {
         stage('Install Node.js and npm') {
             steps {
-                sh 'curl -fsSL https://deb.nodesource.com/setup_lts.x | bash -'
-                sh 'apt-get install -y nodejs'
+                sh 'sudo apt-get install nodejs'
                 sh 'npm install -g npm'
             }
         }
@@ -153,6 +152,13 @@ pipeline {
         stage('Checkout') {
             steps {
                 git 'https://github.com/alphaWomanMuthonks/gallery.git'
+            }
+        }
+
+        stage('Install Softwares') {
+            steps {
+                // sh 'npm install -g npm'
+                sh 'npm install'
             }
         }
 
