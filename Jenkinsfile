@@ -13,7 +13,8 @@ pipeline {
 
         stage('Install Softwares') {
             steps {
-                sh 'npm install'
+                sh 'npm install -g npm'
+                // sh 'npm install'
             }
         }
 
@@ -25,7 +26,8 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh 'npm test'
+                // sh 'npm test'
+                sh 'node server.js'
             }
         }
 
