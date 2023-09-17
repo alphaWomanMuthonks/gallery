@@ -1,6 +1,10 @@
 .turquoise{
     background-color: #26a69a;
 }
+.center-text {
+  text-align: center;
+}
+
 
 .row {
     display: flex;
