@@ -149,7 +149,7 @@ pipeline {
             }
         }
 
-        stage('Checkout') {
+        stage('Clone') {
             steps {
                 git 'https://github.com/alphaWomanMuthonks/gallery.git'
             }
