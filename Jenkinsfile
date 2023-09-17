@@ -1,49 +1,38 @@
-pipeline { 
-    
-  agent any
-  
-  stages {
-      
-    stage('clone repository') {
-        
-      steps {
-          
-        git 'https://github.com/alphaWomanMuthonks/gallery.git'
-      }
+pipeline {
+
+    agent any
+
+    stages {
+
+        stage('Clone repository') {
+
+            steps {
+                git 'https://github.com/alphaWomanMuthonks/gallery.git'
+            }
+        }
+
+        stage('Install Softwares') {
+            steps {
+                sh 'npm install'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'build code'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'npm test'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sh 'render deploy'
+            }
+        }
     }
-    
-    stage('install Softwares') {
-        
-      steps {
-          
-        sh 'npm install'
-        
-      }
-    }
-    stage('build') {
-        
-      steps {
-          
-        sh 'build code'
-        
-      }
-    }
-        
-    stage('test') {
-        
-      steps {
-          
-        sh 'npm test'
-        
-      }
-    stage('deploy') {
-        
-      steps {
-          
-        sh 'render deploy'
-        
-      }
-    }
-  }
-        
 }
