@@ -13,7 +13,7 @@ pipeline {
 
         stage('Install Softwares') {
             steps {
-                sh 'npm install -g npm'
+                // sh 'npm install -g npm'
                 // sh 'npm install'
             }
         }
