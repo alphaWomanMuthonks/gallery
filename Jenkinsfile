@@ -140,7 +140,9 @@
 
 pipeline {
     agent any
-
+    tools {
+        nodejs '20.6.1'
+    }
     stages {
         stage('Clone') {
             steps {
