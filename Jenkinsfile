@@ -34,13 +34,14 @@ pipeline {
                     }
                 }
             }
-
+        }
 
         stage('Run Application') {
             steps {
                 sh 'node server.js'
             }
         }
+
         stage('Send Slack Notification') {
             when {
                 expression {
@@ -59,6 +60,3 @@ pipeline {
         }
     }
 }
-    
-
-
