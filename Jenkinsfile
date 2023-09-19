@@ -41,6 +41,24 @@ pipeline {
                 sh 'node server.js'
             }
         }
+        stage('Send Slack Notification') {
+            when {
+                expression {
+                    currentBuild.resultIsBetterOrEqualTo('SUCCESS')
+                }
+            }
+            steps {
+                script {
+                    slackSend(
+                        channel: '#joy_ip1', 
+                        tokenCredentialId: 'xoxb-5893742288343-5932218909920-Lp9BnEywsroRb1oGQc5lIAL7',
+                        message: "Deployment successful in Jenkins: ${BUILD_URL}"
+                    )
+                }
+            }
+        }
     }
 }
+    
+
 
